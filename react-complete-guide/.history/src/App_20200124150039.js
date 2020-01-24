@@ -39,7 +39,7 @@ class App extends Component {
 
   nameChangeHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(value => {
-      return value.id === id;
+      return (value.id = id);
     });
 
     const person = {
@@ -49,9 +49,6 @@ class App extends Component {
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
-    persons[personIndex] = person;
-
-    this.setState({ persons });
   };
 
   togglePersonsHandler = () => {
@@ -103,8 +100,6 @@ class App extends Component {
           })}
         </div>
       );
-
-      style.backgroundColor = "red";
     }
     return (
       <div className="App">
