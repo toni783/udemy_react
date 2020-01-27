@@ -1,6 +1,6 @@
 // class based approach
 import React, { Component } from "react";
-import Radium, { StyleRoot } from "radium";
+import Radium from "radium";
 
 import "./App.css";
 
@@ -129,29 +129,25 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>hi </h1>
-          <p className={clasess.join(" ")}>this works </p>
+      <div className="App">
+        <h1>hi </h1>
+        <p className={clasess.join(" ")}>this works </p>
 
-          <button
-            key="buttonHover"
-            style={style}
-            onClick={() =>
-              this.switchNameHandler("Gilbert with arrow function ")
-            }
-          >
-            {" "}
-            Switch Name{" "}
-          </button>
+        <button
+          style={style}
+          onClick={() => this.switchNameHandler("Gilbert with arrow function ")}
+        >
+          {" "}
+          Switch Name{" "}
+        </button>
 
-          <button style={style} onClick={this.togglePersonsHandler}>
-            Toggle persons
-          </button>
-          {persons}
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Toggle persons
+        </button>
+        {persons}
 
-          {/* turnary approach */}
-          {/* {this.state.showPersons ? (
+        {/* turnary approach */}
+        {/* {this.state.showPersons ? (
           <div>
             <Person
               clicked={this.switchNameHandler.bind(
@@ -172,8 +168,7 @@ class App extends Component {
             </Person>
           </div>
         ) : null} */}
-        </div>
-      </StyleRoot>
+      </div>
     );
   }
 }

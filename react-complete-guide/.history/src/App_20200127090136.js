@@ -1,7 +1,5 @@
 // class based approach
 import React, { Component } from "react";
-import Radium, { StyleRoot } from "radium";
-
 import "./App.css";
 
 import Person from "./Person/Person";
@@ -10,8 +8,7 @@ class App extends Component {
   state = {
     persons: [
       { id: 1, name: "Gilbert", age: 28 },
-      { id: 2, name: "Yayu", age: 25 },
-      { id: 3, name: "Vianel", age: 25 }
+      { id: 2, name: "Yayu", age: 25 }
     ],
     otherProperty: "anything can be here ",
     showPersons: false
@@ -70,11 +67,7 @@ class App extends Component {
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer",
-      ":hover": {
-        backgroundColor: "lightgreen",
-        color: "black"
-      }
+      cursor: "pointer"
     };
 
     let persons = null;
@@ -112,30 +105,16 @@ class App extends Component {
       );
 
       style.backgroundColor = "red";
-
-      style[":hover"] = {
-        backgroundColor: "salmon",
-        color: "black"
-      };
     }
 
     const clasess = [];
-    if (this.state.persons.length <= 2) {
-      clasess.push("red");
-    }
-
-    if (this.state.persons.length <= 1) {
-      clasess.push("bold");
-    }
-
-    return (
-      <StyleRoot>
+    if (this.state.persons)
+      return (
         <div className="App">
           <h1>hi </h1>
-          <p className={clasess.join(" ")}>this works </p>
+          <p className={clasess}>this works </p>
 
           <button
-            key="buttonHover"
             style={style}
             onClick={() =>
               this.switchNameHandler("Gilbert with arrow function ")
@@ -173,12 +152,11 @@ class App extends Component {
           </div>
         ) : null} */}
         </div>
-      </StyleRoot>
-    );
+      );
   }
 }
 
-export default Radium(App);
+export default App;
 
 // functional  based approach
 // import React, { useState } from 'react';
