@@ -7,14 +7,14 @@ import "./App.css";
 import Person from "./Person/Person";
 
 const StyledButton = styled.button`
-  background-color: ${props => (props.alt ? "red" : "green")};
+  background-color: white;
   font: inherit;
   border: 1px solid blue;
   padding: 8px;
   cursor: pointe;
 
   &:hover {
-    background-color: ${props => (props.alt ? "salmon" : "lightgreen")};
+    background-color: lightgreen;
     color: black;
   }
 `;

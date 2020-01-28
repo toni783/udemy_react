@@ -10,7 +10,7 @@ const StyledDiv = styled.div`
   text-align: center;
 
   @media (min-width: 500px) {
-    width: 450px;
+    width: "450px";
   }
 `;
 

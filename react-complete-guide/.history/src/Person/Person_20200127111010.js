@@ -10,20 +10,20 @@ const StyledDiv = styled.div`
   text-align: center;
 
   @media (min-width: 500px) {
-    width: 450px;
+    width: "450px";
   }
 `;
 
 const person = props => {
   return (
-    <StyledDiv>
+    <div className="Person">
       <p onClick={props.clicked}>
         i am {props.name} and i am {props.age} years old{" "}
       </p>
       <p> {props.children} </p>
 
       <input onChange={props.changed} value={props.name} type="text" />
-    </StyledDiv>
+    </div>
   );
 };
 

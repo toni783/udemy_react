@@ -7,16 +7,16 @@ import "./App.css";
 import Person from "./Person/Person";
 
 const StyledButton = styled.button`
-  background-color: ${props => (props.alt ? "red" : "green")};
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointe;
+background-Color: white,
+font: inherit,
+border: 1px solid blue,
+padding: 8px",
+cursor: pointer
 
-  &:hover {
-    background-color: ${props => (props.alt ? "salmon" : "lightgreen")};
-    color: black;
-  }
+&:hover{
+  background-color: "lightgreen",
+        color: "black"
+}
 `;
 
 class App extends Component {
@@ -145,13 +145,9 @@ class App extends Component {
           Switch Name{" "}
         </button>
 
-        <StyledButton
-          alt={this.state.showPersons}
-          onClick={this.togglePersonsHandler}
-        >
+        <button style={style} onClick={this.togglePersonsHandler}>
           Toggle persons
-        </StyledButton>
-
+        </button>
         {persons}
 
         {/* turnary approach */}
