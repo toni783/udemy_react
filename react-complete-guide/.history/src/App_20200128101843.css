@@ -47,10 +47,12 @@
   padding: 8px;
   cursor: pointer;
 
+  &:hover {
+    background-color: $ {
+      props=>(props.alt ? "salmon" : "lightgreen")
+    }
 
-}
-
-.button:hover {
-  background-color: lightgreen;
-  color: black;
+    ;
+    color: black;
+  }
 }
