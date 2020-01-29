@@ -2,8 +2,10 @@ import React from "react";
 import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
 import Person from "./Person/Person";
 
-const persons = props =>
-  props.persons.map((person, index) => {
+const persons = props => {
+  console.log("[Persons.js] rendering..");
+
+  return props.persons.map((person, index) => {
     return (
       <ErrorBoundary key={person.id}>
         <Person
@@ -15,5 +17,6 @@ const persons = props =>
       </ErrorBoundary>
     );
   });
+};
 
 export default persons;

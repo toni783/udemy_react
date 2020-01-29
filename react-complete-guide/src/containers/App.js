@@ -4,6 +4,11 @@ import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log("[App.js] constructor");
+    // we can add our initial state here but its not required since can be done outside and automatically will be added here behend the scenes
+  }
   state = {
     persons: [
       { id: "asfa1", name: "Max", age: 28 },
@@ -13,6 +18,11 @@ class App extends Component {
     otherState: "some other value",
     showPersons: false
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log("[App.js] getDerivedStateFromProps", props);
+    return state;
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
@@ -46,6 +56,8 @@ class App extends Component {
   };
 
   render() {
+    console.log("[App.js] render");
+
     let persons = null;
 
     if (this.state.showPersons) {
@@ -63,6 +75,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Cockpit
+          title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}
@@ -73,6 +86,10 @@ class App extends Component {
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
+  }
+
+  componentDidMount() {
+    console.log("[App.js] componentDidMount");
   }
 }
 
