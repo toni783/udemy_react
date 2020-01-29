@@ -1,30 +1,20 @@
-import React from "react";
-// import "./Person.css";
-import styled from "styled-components";
+import React from 'react';
 
-const StyledDiv = styled.div`
-  width: 60%;
-  margin: 16px auto;
-  border: 1px solid #eee;
-  padding: 16px;
-  text-align: center;
+import classes from './Person.css';
 
-  @media (min-width: 500px) {
-    width: 450px;
-  }
-`;
+const person = ( props ) => {
+    const rnd = Math.random();
 
-const person = props => {
-  return (
-    <StyledDiv>
-      <p onClick={props.clicked}>
-        i am {props.name} and i am {props.age} years old{" "}
-      </p>
-      <p> {props.children} </p>
-
-      <input onChange={props.changed} value={props.name} type="text" />
-    </StyledDiv>
-  );
+    if ( rnd > 0.7 ) {
+        throw new Error( 'Something went wrong' );
+    }
+    return (
+        <div className={classes.Person}>
+            <p onClick={props.click}>I'm {props.name} and I am {props.age} years old!</p>
+            <p>{props.children}</p>
+            <input type="text" onChange={props.changed} value={props.name} />
+        </div>
+    )
 };
 
 export default person;

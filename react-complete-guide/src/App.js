@@ -1,248 +1,92 @@
-// class based approach
-import React, { Component } from "react";
-import styled from "styled-components";
-
-import "./App.css";
-
-import Person from "./Person/Person";
-
-const StyledButton = styled.button`
-  background-color: ${props => (props.alt ? "red" : "green")};
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointe;
-
-  &:hover {
-    background-color: ${props => (props.alt ? "salmon" : "lightgreen")};
-    color: black;
-  }
-`;
+import React, { Component } from 'react';
+import classes from './App.css';
+import Person from './Person/Person';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 class App extends Component {
   state = {
     persons: [
-      { id: 1, name: "Gilbert", age: 28 },
-      { id: 2, name: "Yayu", age: 25 },
-      { id: 3, name: "Vianel", age: 25 }
+      { id: 'asfa1', name: 'Max', age: 28 },
+      { id: 'vasdf1', name: 'Manu', age: 29 },
+      { id: 'asdf11', name: 'Stephanie', age: 26 }
     ],
-    otherProperty: "anything can be here ",
+    otherState: 'some other value',
     showPersons: false
-  };
+  }
 
-  switchNameHandler = name => {
-    // console.log('button clicked')
-    this.setState({
-      persons: [
-        {
-          name: name,
-          age: 28
-        },
-        {
-          name: "Yayu edited",
-          age: 25
-        }
-      ]
-    });
-  };
-
-  deletePersonHandler = index => {
-    // const persons = this.state.persons;
-    const persons = [...this.state.persons];
-    persons.splice(index, 1);
-    this.setState({ persons });
-  };
-
-  nameChangeHandler = (event, id) => {
-    const personIndex = this.state.persons.findIndex(value => {
-      return value.id === id;
-    });
+  nameChangedHandler = ( event, id ) => {
+    const personIndex = this.state.persons.findIndex( p => {
+      return p.id === id;
+    } );
 
     const person = {
       ...this.state.persons[personIndex]
     };
+
+    // const person = Object.assign({}, this.state.persons[personIndex]);
 
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons });
-  };
+    this.setState( { persons: persons } );
+  }
+
+  deletePersonHandler = ( personIndex ) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice( personIndex, 1 );
+    this.setState( { persons: persons } );
+  }
 
   togglePersonsHandler = () => {
-    const toggle = this.state.showPersons;
-    this.setState({
-      showPersons: !toggle
-    });
-  };
+    const doesShow = this.state.showPersons;
+    this.setState( { showPersons: !doesShow } );
+  }
 
-  render() {
-    // const style = {
-    // backgroundColor: "white",
-    // font: "inherit",
-    // border: "1px solid blue",
-    // padding: "8px",
-    // cursor: "pointer"
-    // };
-
+  render () {
     let persons = null;
+    let btnClass = '';
 
-    if (this.state.showPersons) {
+    if ( this.state.showPersons ) {
       persons = (
         <div>
-          {/* <Person
-            clicked={this.switchNameHandler.bind(this, "Gilbert with binding")}
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-          />
-
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            changed={this.nameChangeHandler}
-          >
-            {" "}
-            and the inner content is this{" "}
-          </Person> */}
-
-          {this.state.persons.map((person, index) => {
-            return (
+          {this.state.persons.map( ( person, index ) => {
+            return <ErrorBoundary key={person.id}>
               <Person
-                clicked={() => this.deletePersonHandler(index)}
+                click={() => this.deletePersonHandler( index )}
                 name={person.name}
                 age={person.age}
-                key={person.id}
-                changed={event => this.nameChangeHandler(event, person.id)}
-              ></Person>
-            );
-          })}
+                changed={( event ) => this.nameChangedHandler( event, person.id )} />
+            </ ErrorBoundary>
+          } )}
         </div>
       );
 
-      // style.backgroundColor = "red";
+      btnClass = classes.Red;
     }
 
-    const clasess = [];
-    if (this.state.persons.length <= 2) {
-      clasess.push("red");
+    const assignedClasses = [];
+    if ( this.state.persons.length <= 2 ) {
+      assignedClasses.push( classes.red ); // classes = ['red']
     }
-
-    if (this.state.persons.length <= 1) {
-      clasess.push("bold");
+    if ( this.state.persons.length <= 1 ) {
+      assignedClasses.push( classes.bold ); // classes = ['red', 'bold']
     }
 
     return (
-      <div className="App">
-        <h1>hi </h1>
-        <p className={clasess.join(" ")}>this works </p>
-
+      <div className={classes.App}>
+        <h1>Hi, I'm a React App</h1>
+        <p className={assignedClasses.join( ' ' )}>This is really working!</p>
         <button
-          key="buttonHover"
-          onClick={() => this.switchNameHandler("Gilbert with arrow function ")}
-        >
-          {" "}
-          Switch Name{" "}
-        </button>
-
-        <button
-          alt={this.state.showPersons}
-          onClick={this.togglePersonsHandler}
-        >
-          Toggle persons
-        </button>
-
+          className={btnClass}
+          onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {persons}
-
-        {/* turnary approach */}
-        {/* {this.state.showPersons ? (
-          <div>
-            <Person
-              clicked={this.switchNameHandler.bind(
-                this,
-                "Gilbert with binding"
-              )}
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-            />
-
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              changed={this.nameChangeHandler}
-            >
-              {" "}
-              and the inner content is this{" "}
-            </Person>
-          </div>
-        ) : null} */}
       </div>
     );
+    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
 export default App;
-
-// functional  based approach
-// import React, { useState } from 'react';
-// import './App.css';
-
-// import Person from './Person/Person'
-
-//  const app = props => {
-
-//   const [personState, setPersonState] = useState(
-//     {
-//       persons: [
-//         {
-//           name: 'Gilbert',
-//           age: 28
-//         },
-//         {
-//           name: 'Yayu',
-//           age: 25
-//         }
-//       ],
-//      otherProperty: 'anything can be here '
-//     }
-//   );
-
-//   const [otherState, setOtherState] =  useState({  otherProperty: 'anything can be here in other state '});
-
-//   const switchNameHandler = () =>{
-//     // console.log('button clicked')
-//     setPersonState(
-//       {
-//         persons: [
-//           {
-//             name: 'Gilbert edited',
-//             age: 28
-//           },
-//           {
-//             name: 'Yayu edited',
-//             age: 25
-//           }
-//         ]
-//       }
-//     );
-//   }
-
-// console.log(personState, otherState)
-
-//     return (
-//       <div className="App">
-//            <h1>hi </h1>
-//           <p>this works </p>
-
-//           <button onClick={switchNameHandler}> Switch Name  </button>
-
-//           <Person name={personState.persons[0].name} age={personState.persons[0].age}/>
-
-//           <Person name={personState.persons[1].name} age={personState.persons[1].age}> and the inner content is this </Person>
-
-//       </div>
-//     );
-
-// }
-
-// export default app;
