@@ -52,15 +52,25 @@ class App extends Component {
 
   componentDidMount() {
     console.log("[App.js] componentDidMount");
+    // DO: cause side effects
+
+    // DON`T: update the state (triggers re-render)
   }
 
   shouldComponentUpdate(nextProps, nextState) {
     console.log("[App.js] shouldComponentUpdate");
+
+    // DO: decide wheter or not we should continue with the render
+
+    // DON`T: cause side effects
     return true;
   }
 
   componentDidUpdate() {
     console.log("[App.js] componentDidUpdate");
+
+    // DO: Cause Side Effects
+    // DON`T: update the state (triggers re-render)
   }
 
   togglePersonsHandler = () => {
@@ -69,6 +79,9 @@ class App extends Component {
   };
 
   render() {
+    // DO: prepare and structure our JSX code
+
+    // DON`T: add any code that will stop the rendering process .Ex: http request ,time outs ,etc...
     console.log("[App.js] render");
 
     let persons = null;

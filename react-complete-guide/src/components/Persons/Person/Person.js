@@ -10,6 +10,9 @@ class Person extends Component {
   //     throw new Error( 'Something went wrong' );
   // }
   render() {
+    // DO: prepare and structure our JSX code
+
+    // DON`T: add any code that will stop the rendering process .Ex: http request ,time outs ,etc...
     console.log("[Person.js] rendering..");
 
     return (

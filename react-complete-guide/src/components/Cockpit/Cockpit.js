@@ -1,6 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Cockpit.css";
 const cockpit = props => {
+  // hook added for life cycle in functional component
+  useEffect(() => {
+    console.log("[Cockpit.js useEffect hook]");
+    // can do http requests...
+
+    setTimeout(() => {
+      alert("save data to cloud ");
+    }, 1000);
+  }, [props.persons]); // trigger alert only if the persons prop its changed
+
+  useEffect(() => {
+    console.log("[Cockpit.js useEffect hook]");
+    // can do http requests...
+
+    setTimeout(() => {
+      alert("save data to cloud ");
+    }, 1000);
+  }, []); // trigger alert only at the beginning of the render
   let btnClass = "";
   if (props.showPersons) {
     btnClass = classes.Red;
