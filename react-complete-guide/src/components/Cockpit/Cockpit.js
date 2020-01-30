@@ -12,13 +12,34 @@ const cockpit = props => {
   }, [props.persons]); // trigger alert only if the persons prop its changed
 
   useEffect(() => {
-    console.log("[Cockpit.js useEffect hook]");
+    console.log("[Cockpit.js 2nd useEffect hook]");
     // can do http requests...
 
     setTimeout(() => {
       alert("save data to cloud ");
     }, 1000);
   }, []); // trigger alert only at the beginning of the render
+
+  // setup for clean up only for when the component render or its unmountend
+  useEffect(() => {
+    console.log("[Cockpit.js 3rd useEffect hook]");
+    // can do http requests...
+
+    return () => {
+      console.log("[Cockpit.js] clean up work "); // this return statement will make posible the clean up
+    };
+  }, []);
+
+  // setup for clean up on every update cycle
+  useEffect(() => {
+    console.log("[Cockpit.js 4th useEffect hook]");
+    // can do http requests...
+
+    return () => {
+      console.log("[Cockpit.js] clean up work "); // this return statement will make posible the clean up
+    };
+  });
+
   let btnClass = "";
   if (props.showPersons) {
     btnClass = classes.Red;

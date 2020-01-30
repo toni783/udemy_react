@@ -52,6 +52,12 @@ class Persons extends Component {
       );
     });
   }
+
+  componentWillUnmount() {
+    console.log("[Persons.js] componentWillUnmount..");
+
+    // DO: clean up code ,run any code that needs to be executed before the component its removed
+  }
 }
 
 export default Persons;
