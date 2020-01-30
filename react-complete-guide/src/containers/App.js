@@ -50,6 +50,19 @@ class App extends Component {
     this.setState({ persons: persons });
   };
 
+  componentDidMount() {
+    console.log("[App.js] componentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log("[App.js] shouldComponentUpdate");
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log("[App.js] componentDidUpdate");
+  }
+
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     this.setState({ showPersons: !doesShow });
@@ -86,10 +99,6 @@ class App extends Component {
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'Does this work now?'));
-  }
-
-  componentDidMount() {
-    console.log("[App.js] componentDidMount");
   }
 }
 
