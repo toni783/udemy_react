@@ -1,8 +1,14 @@
 import React from "react";
 
-// RECOMMENDED  if we are going to have HOC that are going to change the html or css structure
-const withClass = props => {
-  return <div className={props.classes}> {props.children}</div>;
+// RECOMMENDED  if we are going to have HOC that is going to handle logic of the app (send analitics ,error messages ,etc...)
+const withClass = (WrappedComponent, className) => {
+  return props => {
+    return (
+      <div className={className}>
+        <WrappedComponent {...props} />
+      </div>
+    );
+  };
 };
 
 export default withClass;
