@@ -10,6 +10,11 @@ class Person extends Component {
   // if ( rnd > 0.7 ) {
   //     throw new Error( 'Something went wrong' );
   // }
+
+  constructor(props) {
+    super(props);
+    this.inputElementRef = React.createRef(); // new approach for ref ,React version > 16.2
+  }
   render() {
     // DO: prepare and structure our JSX code
 
@@ -35,12 +40,21 @@ class Person extends Component {
         </p>
         <p>{this.props.children}</p>
         <input
+          // ref={inputEl => {
+          //   this.inputElement = inputEl;
+          // }} // old approach for ref  ,React version < 16.2
+          ref={this.inputElementRef} // new approach for ref ,React version > 16.2
           type="text"
           onChange={this.props.changed}
           value={this.props.name}
         />
       </Aux>
     );
+  }
+
+  componentDidMount() {
+    // this.inputElement.focus(); // old approach  for ref,React version < 16.2
+    this.inputElementRef.current.focus(); // new approach for ref,React version > 16.2
   }
 }
 

@@ -1,23 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import classes from "./Cockpit.css";
 const cockpit = props => {
+  const toggleButtonRef = useRef(null); // ref value access with hooks
+
   // hook added for life cycle in functional component
   useEffect(() => {
     console.log("[Cockpit.js useEffect hook]");
     // can do http requests...
 
-    setTimeout(() => {
-      alert("save data to cloud ");
-    }, 1000);
+    // setTimeout(() => {
+    //   alert("save data to cloud ");
+    // }, 1000);
   }, [props.persons]); // trigger alert only if the persons prop its changed
 
   useEffect(() => {
     console.log("[Cockpit.js 2nd useEffect hook]");
     // can do http requests...
 
-    setTimeout(() => {
-      alert("save data to cloud ");
-    }, 1000);
+    // setTimeout(() => {
+    //   alert("save data to cloud ");
+    // }, 1000);
+
+    toggleButtonRef.current.click(); // ref value access and use with hooks
   }, []); // trigger alert only at the beginning of the render
 
   // setup for clean up only for when the component render or its unmountend
@@ -55,7 +59,11 @@ const cockpit = props => {
     <div className={classes.Cockpit}>
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(" ")}>This is really working!</p>
-      <button className={btnClass} onClick={props.clicked}>
+      <button
+        ref={toggleButtonRef} // ref value access with hooks
+        className={btnClass}
+        onClick={props.clicked}
+      >
         Toggle Persons
       </button>
     </div>
