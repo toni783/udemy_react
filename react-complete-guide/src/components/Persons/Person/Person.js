@@ -12,6 +12,8 @@ class Person extends Component {
   //     throw new Error( 'Something went wrong' );
   // }
 
+  static contextType = AuthContext; // using context approach  with react >= 16.6
+
   constructor(props) {
     super(props);
     this.inputElementRef = React.createRef(); // new approach for ref ,React version > 16.2
@@ -36,15 +38,11 @@ class Person extends Component {
       //   />
       // </Fragment>
       <Aux>
-        <AuthContext.Consumer>
-          {context => {
-            return context.authenticated ? (
-              <p>Authenticated!</p>
-            ) : (
-              <p>Please log in!</p>
-            );
-          }}
-        </AuthContext.Consumer>
+        {this.context.authenticated ? (
+          <p>Authenticated!</p>
+        ) : (
+          <p>Please log in!</p>
+        )}
         <p onClick={this.props.click}>
           I'm {this.props.name} and I am {this.props.age} years old!
         </p>
@@ -65,6 +63,7 @@ class Person extends Component {
   componentDidMount() {
     // this.inputElement.focus(); // old approach  for ref,React version < 16.2
     this.inputElementRef.current.focus(); // new approach for ref,React version > 16.2
+    console.log(this.context.authenticated);
   }
 }
 

@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import classes from "./Cockpit.css";
 import AuthContext from "../../context/auth-context";
 const cockpit = props => {
   const toggleButtonRef = useRef(null); // ref value access with hooks
 
+  const authContext = useContext(AuthContext); // using context approach  with react >= 16.6
+
+  console.log(authContext.authenticated);
   // hook added for life cycle in functional component
   useEffect(() => {
     console.log("[Cockpit.js useEffect hook]");
@@ -67,11 +70,7 @@ const cockpit = props => {
       >
         Toggle Persons
       </button>
-      <AuthContext.Consumer>
-        {context => {
-          return <button onClick={context.login}>Log in</button>;
-        }}
-      </AuthContext.Consumer>
+      <button onClick={authContext.login}>Log in</button>;
     </div>
   );
 };
