@@ -6,7 +6,10 @@ import Backdrop from '../Backdrop/Backdrop'
 class Modal extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         // controls the render of the modal and the inner component life cycle renders, this is a good implementation on this use case
-        return nextProps.show !== this.props.show
+        return (
+            nextProps.show !== this.props.show ||
+            nextProps.children !== this.props.children
+        )
     }
 
     componentDidUpdate() {
