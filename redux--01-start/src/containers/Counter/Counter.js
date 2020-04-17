@@ -3,37 +3,36 @@ import React, { Component } from 'react'
 import CounterControl from '../../components/CounterControl/CounterControl'
 import CounterOutput from '../../components/CounterOutput/CounterOutput'
 import { connect } from 'react-redux'
-import * as actionTypes from '../../store/actions'
-
+import * as actionCreators from '../../store/actions/index'
 class Counter extends Component {
     state = {
         counter: 0,
     }
 
-    counterChangedHandler = (action, value) => {
-        switch (action) {
-            case 'inc':
-                this.setState((prevState) => {
-                    return { counter: prevState.counter + 1 }
-                })
-                break
-            case 'dec':
-                this.setState((prevState) => {
-                    return { counter: prevState.counter - 1 }
-                })
-                break
-            case 'add':
-                this.setState((prevState) => {
-                    return { counter: prevState.counter + value }
-                })
-                break
-            case 'sub':
-                this.setState((prevState) => {
-                    return { counter: prevState.counter - value }
-                })
-                break
-        }
-    }
+    // counterChangedHandler = (action, value) => {
+    //     switch (action) {
+    //         case 'inc':
+    //             this.setState((prevState) => {
+    //                 return { counter: prevState.counter + 1 }
+    //             })
+    //             break
+    //         case 'dec':
+    //             this.setState((prevState) => {
+    //                 return { counter: prevState.counter - 1 }
+    //             })
+    //             break
+    //         case 'add':
+    //             this.setState((prevState) => {
+    //                 return { counter: prevState.counter + value }
+    //             })
+    //             break
+    //         case 'sub':
+    //             this.setState((prevState) => {
+    //                 return { counter: prevState.counter - value }
+    //             })
+    //             break
+    //     }
+    // }
 
     render() {
         return (
@@ -90,15 +89,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onIncrementCounter: () => dispatch({ type: actionTypes.INCREMENT }),
-        onDecrementCounter: () => dispatch({ type: actionTypes.DECREMENT }),
-        onAddCounter: (value) => dispatch({ type: actionTypes.ADD, value }),
-        onSubstractCounter: (value) =>
-            dispatch({ type: actionTypes.SUBSTRACT, value }),
-        onStoreResult: (result) =>
-            dispatch({ type: actionTypes.STORE_RESULT, result }),
-        onDeleteResult: (value) =>
-            dispatch({ type: actionTypes.DELETE_RESULT, resultId: value }),
+        onIncrementCounter: () => dispatch(actionCreators.increment()),
+        onDecrementCounter: () => dispatch(actionCreators.decrement()),
+        onAddCounter: (value) => dispatch(actionCreators.add(value)),
+        onSubstractCounter: (value) => dispatch(actionCreators.substract(value)),
+        onStoreResult: (result) => dispatch(actionCreators.storeResult(result)),
+        onDeleteResult: (value) => dispatch(actionCreators.deleteResult(value)),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Counter)
